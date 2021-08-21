@@ -25,8 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
   double tax = 0.0;
   double taxPercent = 0.2;
   int amount = 0;
-  String url =
-      'https://us-central1-demostripe-b9557.cloudfunctions.net/StripePI';
+  String url = 'https://stripe-test.cloudfunctions.net/StripePI';
 
   @override
   void initState() {
@@ -54,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         : createPaymentMethod(context);
   }
 
+  // payment method
   // create native Stripe payment method (is customized here for Android)
   Future<void> createPaymentMethodNative(context) async {
     print('started NATIVE payment...');
@@ -112,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 buttonText: 'CLOSE'));
   }
 
+  // payment method (credit card if device does not support native)
   Future<void> createPaymentMethod(context) async {
     StripePayment.setStripeAccount('');
     tax = ((totalCost * taxPercent) * 100).ceil() / 100;
@@ -137,6 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 buttonText: 'CLOSE'));
   }
 
+  // payment intent
   Future<void> processPaymentAsDirectCharge(PaymentMethod paymentMethod) async {
     setState(() {
       showSpinner = true;
